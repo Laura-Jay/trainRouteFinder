@@ -33,11 +33,10 @@ const hashmap: IHashmap = {};
 // create list of keys, outer object = hashmap
 for (const route of data){
 
-    if (Object.hasOwnProperty.call(hashmap,route.FROM_TIPLOC)){
-        console.log("already here!")
-    } else {
+    if (!Object.hasOwnProperty.call(hashmap,route.FROM_TIPLOC)){
         hashmap[route.FROM_TIPLOC] = {"a" : 0}
-}
+    } 
+    
 }
 
 //create inner object
@@ -47,7 +46,9 @@ for (const key of keyArr){
     const adjNodes: INodes = {}
     for (const obj of data){
         if (obj.TO_TIPLOC === key){
+            if (parseInt(obj.DISTANCE) > 0){
             adjNodes[obj.FROM_TIPLOC] = parseInt(obj.DISTANCE)
+            }
         }
     }
     hashmap[key] = adjNodes

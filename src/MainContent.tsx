@@ -25,7 +25,9 @@ export default function MainContent(): JSX.Element {
 
     const graphData = createGraph(stationData);
 
-    console.log(graphData)
+    const result = findRoute(startPoint, endPoint, graphData);
+
+    
 
     return (
         <>

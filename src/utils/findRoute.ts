@@ -1,28 +1,22 @@
-const timetable = require('~/app/data.json')
-
-/*
-{
-		"FROM_TIPLOC": "ABCWM",
-		"TO_TIPLOC": "FERNHIL",
-		"DISTANCE": "483",
-		"ELECTRIC": "N",
-		"PASSENGER_USE": "Y",
-		"LINE_CODE": "U&D"
-	} 
-*/
-
-interface IRoute { 
-    FROM_TIPLOC: string,
-		TO_TIPLOC: string,
-		DISTANCE: string,
-		ELECTRIC: string,
-		PASSENGER_USE: string,
-		LINE_CODE: string
+interface IAdjacentNodes {
+	[key: string] : number	
 }
 
-export function findRoute(start: string, end: string, data: IRoute[]){
- for (let route of data){
-	 
- }
+interface IGraph {
+		[key: string] : IAdjacentNodes
+}
+
+export function findRoute(start: string, end: string, data: IGraph){
+
+ const Graph = require('node-dijkstra');
+
+ const route = new Graph();
+
+	for (const [key, value] of Object.entries(data)){
+		route.addNode(key, value)
+	}
+
+ return route.path(start, end, {cost: true})
+
 }
 
