@@ -1,13 +1,11 @@
 interface IProps {
-    station: string
+  station: string;
 }
 
-
-export default function StationList(props: IProps): JSX.Element { 
-
-return (
+export default function StationList(props: IProps): JSX.Element {
+  return (
     <>
-    <p>{props.station} </p>
+      <p>{props.station} </p>
     </>
-)
+  );
 }

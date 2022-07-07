@@ -1,82 +1,122 @@
-import { findRoute } from "./utils/findRoute"
-import { findStations } from "./utils/findStations"
-import stationData from "./data.json"
-import StationList from "./StationList"
-import { useState } from "react"
-import { createGraph } from "./utils/createGraph"
+import { findRoute } from "./utils/findRoute";
+import { findStations } from "./utils/findStations";
+import stationData from "./data.json";
+import { useEffect, useState } from "react";
+import { createGraph } from "./utils/createGraph";
 
+interface IOutput {
+  cost: number;
+  path: string[];
+}
 
-
+// to improve this I would use useReducer instead of multiple useStates
 export default function MainContent(): JSX.Element {
+  const [startPoint, setStartPoint] = useState("");
+  const [endPoint, setEndPoint] = useState("");
+  const [toggle, setToggle] = useState(false);
+  const [result, setResult] = useState<IOutput>({ cost: 0, path: [] });
+  const [cost, setCost] = useState(0);
+  const [path, setPath] = useState<string[]>([]);
 
-    const [startPoint, setStartPoint] = useState("");
-    const [endPoint, setEndPoint] = useState("");
+  const stations = findStations(stationData);
 
-    const stations = findStations(stationData)
+  const pathList = path.map((station) => <li key={station}>{station}</li>);
 
-    const stationCodes = stations.map((station, index) => 
-        <StationList
-        key = {index} 
-        station ={station}/> )
+  const graphData = createGraph(stationData);
 
-    function handleSubmit(event: any) {
-        event.preventDefault();
+  function handleSelectStart(event: any) {
+    setStartPoint(event.target.value);
+  }
+
+  function handleSelectEnd(event: any) {
+    setEndPoint(event.target.value);
+  }
+
+  function handleClick(event: any) {
+    if (!startPoint) {
+      alert("Please enter a valid start location");
+    } else if (!endPoint) {
+      alert("Please enter a valid end location");
+    } else if (startPoint === endPoint) {
+      alert("Start location must be different from end location");
+    } else {
+      setToggle(!toggle);
+      setResult(findRoute(startPoint, endPoint, graphData));
     }
+  }
 
-    const graphData = createGraph(stationData);
+  function handleReset(event: any) {
+    setToggle(!toggle);
+    setStartPoint("");
+    setEndPoint("");
+    setResult({ cost: 0, path: [] });
+    setCost(0);
+    setPath([]);
+  }
 
-    const result = findRoute(startPoint, endPoint, graphData);
+  useEffect(() => {
+    if (result.cost > 0) {
+      setCost(result.cost / 1000);
+      setPath(result.path);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toggle]);
 
-    
-
-    return (
-        <>
-        <div className="responsive-wrapper">
-
+  return (
+    <>
+      <div className="responsive-wrapper">
         <section className="route-form">
-         <form onSubmit={handleSubmit}>   
-        <h2>Find the shortest journey...</h2>
-        <div className="route-input">
-        <p>From: </p>
-        <input 
-        type="text" 
-        placeholder="Enter start station code"
-        value={startPoint}
-        onChange={(e) => setStartPoint(e.target.value)}
-        ></input>
-        </div>
+          <h2>Find the shortest journey...</h2>
 
-        <div className="route-input">
-        <p>To: </p>
-        <input type="text" 
-        placeholder="Enter destination station code"
-        value={endPoint}
-        onChange={(e) => setEndPoint(e.target.value)}
-        ></input>
-        </div>
+          <div className="select-container">
+            <div className="select-label">
+              <p>From: </p>
+              <select onChange={handleSelectStart}>
+                <option value="">Select starting station</option>
+                {stations.map((station) => (
+                  <option key={station} value={station}>
+                    {station}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="select-label">
+              <p>To: </p>
+              <select onChange={handleSelectEnd}>
+                <option value="">Select destination station</option>
+                {stations.map((station) => (
+                  <option key={station} value={station}>
+                    {station}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-
-        <button type="submit" >Calculate Route</button> 
-        </form>
+          <div className="button-bar">
+            <button onClick={handleClick}>Calculate Route</button>
+            <button onClick={handleReset}>Reset</button>
+          </div>
         </section>
 
-
-
-        <section className="route-result">
+        {cost > 0 ? (
+          <section className="route-result">
             <h2>The shortest journey is:</h2>
             <h3>Start Point: {startPoint} </h3>
             <h3>End Point: {endPoint}</h3>
-            <h3>Distance: </h3>
-            <h3>Changes:  </h3>
-        </section>
-
-        <section className="station-list">
-        <h2>Available Stations:</h2>
-         
-        </section>
-
-        </div>
-        </>
-
-    )
+            <h3>Distance: {cost}</h3>
+            <h3>Changes: </h3>
+            <ol className="list">{pathList}</ol>
+          </section>
+        ) : (
+          <section className="instruction">
+            <h3>
+              Select a start and end point and click calculate to find the
+              shortest available route
+            </h3>
+          </section>
+        )}
+      </div>
+    </>
+  );
 }

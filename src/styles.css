@@ -1,106 +1,157 @@
 :root {
-    --c-text-primary: #282a32;
-    --c-text-secondary: #686b87;
-    --c-text-action: #404089;
-    --c-accent-primary: #434ce8;
-    --c-border-primary: #eff1f6;
-    --c-background-primary: #ffffff;
-    --c-background-secondary: #fdfcff;
-    --c-background-tertiary: #ecf3fe;
-    --c-background-quaternary: #e9ecf4;
-  }
-
-  @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-  body {
-    line-height: 1.5;
-    min-height: 100vh;
-    font-family: "Be Vietnam Pro", sans-serif;
-    background-color: var(--c-background-secondary);
-    color: var(--c-text-primary);
-  }
-
-  .responsive-wrapper {
-    width: 90%;
-    max-width: 2300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  button {
-    font: inherit;
-    color: inherit;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1em;
-    height: 40px;
-    border-radius: 8px;
-    line-height: 1;
-    border: 2px solid var(--c-border-primary);
-    color: var(--c-text-action);
-    font-size: 0.875rem;
-    transition: 0.15s ease;
-    background-color: var(--c-background-primary);
-    cursor: pointer;
-  }
-  
-  button:focus {
-    border-color: var(--c-accent-primary);
-    color: var(--c-accent-primary);
-  }
-  
-  button:hover {
-    border-color: var(--c-accent-primary);
-    color: var(--c-accent-primary);
-  }
-
-  input {
-    font: inherit;
-    color: inherit;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1em 0 36px;
-    height: 40px;
-    border-radius: 8px;
-    border: 2px solid var(--c-border-primary);
-    color: var(--c-text-action);
-    font-size: 0.875rem;
-    transition: 0.15s ease;
-    width: 70%;
-    max-width: 500px;
-    line-height: 1;
-  }
-
-  h1 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    line-height: 1.5em;
-  }
-  
-  @media (max-width: 550px) {
-    h1 {
-      margin-bottom: 1rem;
-    }
-  }
-
-.route-form {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 10px;
-background-color: aquamarine;
-border-radius: 10px;
-margin: 50px auto;
-padding: 20px;
+  --c-text-primary: #282a32;
+  --c-text-secondary: #686b87;
+  --c-text-action: #404089;
+  --c-accent-primary: #434ce8;
+  --c-border-primary: #eff1f6;
+  --c-background-primary: #ffffff;
+  --c-background-secondary: #fdfcff;
+  --c-background-tertiary: #ecf3fe;
+  --c-background-quaternary: #e9ecf4;
 }
 
-.route-input {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  line-height: 1.5;
+  min-height: 100vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  background-color: var(--c-background-secondary);
+  color: var(--c-text-primary);
+  position: relative;
+}
+
+.responsive-wrapper {
+  width: 90%;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+select::-ms-expand {
+  display: none;
+}
+select {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0.5em 2em 0.5em 0.5em;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  font: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 15px top 1em, right 10px top 1em;
+  background-size: 5px 5px, 5px 5px;
+  min-width: 250px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+  height: 40px;
+  border-radius: 8px;
+  line-height: 1;
+  border: 2px solid var(--c-border-primary);
+  color: var(--c-text-action);
+  font-size: 0.875rem;
+  transition: 0.15s ease;
+  background-color: var(--c-background-primary);
+  cursor: pointer;
+  min-width: 150px;
+}
+
+button:focus {
+  border-color: var(--c-accent-primary);
+  color: var(--c-accent-primary);
+}
+
+button:hover {
+  border-color: var(--c-accent-primary);
+  color: var(--c-accent-primary);
+}
+
+.button-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em 0 36px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid var(--c-border-primary);
+  color: var(--c-text-action);
+  font-size: 0.875rem;
+  transition: 0.15s ease;
+  width: 70%;
+  max-width: 500px;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5em;
+}
+
+@media (max-width: 550px) {
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+
+.route-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background-color: aquamarine;
+  border-radius: 10px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.select-label {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.select-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.route-result {
+  margin-left: 30px;
+}
+
+.instruction {
+  text-align: center;
 }

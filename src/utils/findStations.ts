@@ -1,4 +1,3 @@
-
 /*
 {
 		"FROM_TIPLOC": "ABCWM",
@@ -10,23 +9,21 @@
 	} 
 */
 
-
-interface IRoute { 
-    FROM_TIPLOC: string,
-		TO_TIPLOC: string,
-		DISTANCE: string,
-		ELECTRIC: string,
-		PASSENGER_USE: string,
-		LINE_CODE: string
+interface IRoute {
+  FROM_TIPLOC: string;
+  TO_TIPLOC: string;
+  DISTANCE: string;
+  ELECTRIC: string;
+  PASSENGER_USE: string;
+  LINE_CODE: string;
 }
 
-export function findStations(data : IRoute[]): string[]{
-    const stations: string[] = [];
-    for (const route of data){
-		if (!stations.includes(route.FROM_TIPLOC)){
-			stations.push(route.FROM_TIPLOC)
-		}
+export function findStations(data: IRoute[]): string[] {
+  const stations: string[] = [];
+  for (const route of data) {
+    if (!stations.includes(route.FROM_TIPLOC)) {
+      stations.push(route.FROM_TIPLOC);
     }
-	return stations
+  }
+  return stations;
 }
-
