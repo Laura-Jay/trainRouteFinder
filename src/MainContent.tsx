@@ -3,6 +3,7 @@ import { findStations } from "./utils/findStations"
 import stationData from "./data.json"
 import StationList from "./StationList"
 import { useState } from "react"
+import { createGraph } from "./utils/createGraph"
 
 
 
@@ -21,6 +22,10 @@ export default function MainContent(): JSX.Element {
     function handleSubmit(event: any) {
         event.preventDefault();
     }
+
+    const graphData = createGraph(stationData);
+
+    console.log(graphData)
 
     return (
         <>
@@ -65,7 +70,7 @@ export default function MainContent(): JSX.Element {
 
         <section className="station-list">
         <h2>Available Stations:</h2>
-          {stationCodes}
+         
         </section>
 
         </div>
